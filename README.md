@@ -4,7 +4,7 @@ Shortens URLs by taking database index and converting to base 56 with a modified
 In its current state, URLshort is not hosted anywhere and
 only generates and displays a shortened (fake) URL.
 
-![Sample Image](https://raw.githubusercontent.com/username/projectname/master/sample_image.png)
+![Sample Image](https://raw.githubusercontent.com/hur/urlshort/master/sample_image.png)
 ## How to setup development environment
 ### Requirements
 Python 3 & virtualenv (recommended)
