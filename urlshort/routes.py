@@ -1,8 +1,10 @@
-from flask import render_template, flash
+from flask import render_template, flash, redirect
 from urlshort import app, db
 from urlshort.forms import URLForm
 from urlshort.models import Link
 from urlshort.shorten import URLOperations
+from urllib.parse import urlparse
+
 @app.route('/', methods=['GET','POST'])
 def index():
     form = URLForm()
@@ -24,6 +26,16 @@ def index():
         db.session.commit()
         flash(app.config["URL"] + "/" + link.short)
         print("Added to database: " + link.short)
-        # Do database things here
-        # flash the new URL
+    else:
+        flash('Invalid URL.')
     return render_template('index.html', form=form)
+
+@app.route('/<string:short>')
+def redirectShort(short):
+    # id = URLOperations.lengthen(short)
+    search = Link.query.filter_by(short=short).first()
+    if not search:
+        print("Cannot redirect. Invalid URL.")
+        return redirect('/')
+    return redirect(search.long)
+
