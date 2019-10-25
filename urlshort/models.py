@@ -8,7 +8,7 @@ class Link(db.Model):
     short = db.Column(db.String())
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     def __repr__(self):
-        return '<Link {}: {} >'.format(self.id, self.timestamp)
+        return '<Link {}: Long: {}, Short: {}, {}>'.format(self.id, self.long, self.short, self.timestamp)
 
     
 
