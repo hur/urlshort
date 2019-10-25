@@ -26,8 +26,8 @@ def index():
         db.session.commit()
         flash(app.config["URL"] + "/" + link.short)
         print("Added to database: " + link.short)
-    else:
-        flash('Invalid URL.')
+        # Need some way to flash an error message if form doesnt validate.
+        # Problem is that with else: flash(msg) the error will flash by default until form is submitted.
     return render_template('index.html', form=form)
 
 @app.route('/<string:short>')
