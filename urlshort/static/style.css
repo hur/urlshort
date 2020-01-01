@@ -26,7 +26,8 @@
 }
 
 #footer a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
+    color: red;
 }
 
 #footer a:visited {
