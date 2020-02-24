@@ -23,7 +23,7 @@ Activate the virtual environment:
 (Windows / CMD):
 venv\Scripts\activate
 (Mac OS / Unix):
-source venv\Scripts\activate 
+source venv/bin/activate 
 ```
 Install requirements:
 
