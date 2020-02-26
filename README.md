@@ -1,8 +1,7 @@
 # URLshort
 Shortens URLs by taking database index and converting to base 56 with a modified character set.
 
-In its current state, URLshort is not hosted anywhere and
-only generates and displays a shortened URL.
+In its current state, URLshort is not hosted anywhere.
 
 ![Sample Image](https://raw.githubusercontent.com/hur/urlshort/master/sample_image.png)
 ## How to setup development environment
