@@ -44,6 +44,6 @@ Initialize the database in the Python interpreter:
 >>> from urlshort import db
 >>> db.create_all()
 ```
-Run the app using `flask run`.
+Run the app using `flask run`. In some cases using `python -m flask run` instead may resolve issues that occur with `flask run`.
 
 Enter a URL and press shorten. The web app will display `urlshort.git/X`. Navigate to `http://127.0.0.1:5000/X` to be redirected to the page.
