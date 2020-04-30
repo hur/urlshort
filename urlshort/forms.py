@@ -1,8 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import ValidationError, DataRequired, URL
+from wtforms.validators import DataRequired, URL, InputRequired
 
 
-class URLForm(FlaskForm): 
-    url = StringField('url', validators=[DataRequired(), URL(require_tld=True)],
-                     render_kw={"placeholder": "Paste URL here"})
+class URLForm(FlaskForm):
+    url = StringField('url', validators=[InputRequired(), URL(require_tld=True)],
+                      render_kw={"placeholder": "Paste URL here"})
+
+
+class UnshortenForm(FlaskForm):
+    url = StringField('url', validators=[InputRequired()],  # ADD URL
+                      render_kw={"placeholder": "Enter URL to unshorten"})

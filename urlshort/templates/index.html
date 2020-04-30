@@ -1,26 +1,6 @@
-<head>
-<link rel="stylesheet" href="{{url_for('.static', filename='style.css')}}">    
-<title>urlshort</title>
-</head>
-<body>
-<div id="aligner">
-    <div id ="pal">
-        <form method="POST" action="/">
-            {{ form.csrf_token }}
-            {{ form.url }}
-            <input type="submit" value="Shorten">
-        </form>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p class="flashes">{{ message }}</p>
-            {% endfor %}
-        {% else %}
-            <p class="flashes">urlshort.git</p>
-        {% endif %}
-        {% endwith %}  
-    </div>
-</div>
-<div id="footer"><a href="https://www.github.com/hur/urlshort/">GitHub Source</a></div>
-</body>
+{% extends 'base.html' %}
 
+{% set action = '/' %}
+{% set action_label = 'Shorten' %}
+{% set footer_url2 = url_for('unshortenRoute') %}
+{% set footer_url2_label = 'Unshorten URL' %}

@@ -1,0 +1,47 @@
+<!--
+To use this layout, the following variables must be set in the child template:
+action: Where the form should send the POST request to (e.g. '/')
+action_label: Label for the form's submit button
+    The following are optional:
+footer_url2: Url to link to in second footer link
+footer_url2_label: Label to display for the second footer link
+-->
+
+<head>
+<link rel="stylesheet" href="{{url_for('.static', filename='style.css')}}">
+<title>urlshort</title>
+</head>
+<body>
+<div id="aligner">
+    <div id ="pal">
+        {% if form.errors %}
+            URL validation failed.
+        {% else %}
+            &nbsp
+        {% endif %}
+        <form method="POST" action="{{ action }}">
+            {{ form.csrf_token }}
+            {{ form.url }}
+            <input type="submit" value="{{ action_label }}">
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="flashes">{{ message }}</p>
+            {% endfor %}
+        {% else %}
+            <p class="flashes">urlshort.git</p>
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+<div id="footer">
+    <a href="https://www.github.com/hur/urlshort/">GitHub Source</a>
+    {% if footer_url2 is defined and footer_url2_label is defined %}
+    •
+    <a href={{ footer_url2 }}>{{ footer_url2_label }}</a>
+    {% endif %}
+</div>
+</body>
+

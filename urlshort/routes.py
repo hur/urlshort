@@ -1,41 +1,57 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
+
 from urlshort import app, db
-from urlshort.forms import URLForm
+from urlshort.forms import URLForm, UnshortenForm
 from urlshort.models import Link
 from urlshort.shorten import URLOperations
-from urllib.parse import urlparse
 
-@app.route('/', methods=['GET','POST'])
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
     form = URLForm()
+
     if form.validate_on_submit():
         search = Link.query.filter_by(long=form.url.data).first()
+
         # Check if url already in database.
         if search:
             print("Exists in db: " + search.short)
             flash(app.config["URL"] + "/" + search.short)
-            return render_template('index.html', form=form)
+            return redirect(url_for('index'))
+
         # If not, add to database.
         link = Link(long=form.url.data)
         db.session.add(link)
-        # Now get the id of the link that was just added to the db and use it
-        # to create shortened link
         link = Link.query.filter_by(long=form.url.data).first()
-        link.short=URLOperations.shorten(int(link.id))
+        link.short = URLOperations.shorten(link.id)
         db.session.add(link)
         db.session.commit()
         flash(app.config["URL"] + "/" + link.short)
         print("Added to database: " + link.short)
-        # Need some way to flash an error message if form doesnt validate.
-        # Problem is that with else: flash(msg) the error will flash by default until form is submitted.
+
+        return redirect(url_for('index'))
     return render_template('index.html', form=form)
+
+
+@app.route('/unshorten', methods=['GET', 'POST'])
+def unshortenRoute():
+    form = UnshortenForm()
+    if form.validate_on_submit():
+        search = Link.query.filter_by(short=form.url.data).first()
+        if search:
+            print("Exists in db: " + search.short)
+            flash(search.long)
+        else:
+            flash('Not found')
+        return redirect(url_for('unshortenRoute'))
+    return render_template('unshorten.html', form=form)
+
 
 @app.route('/<string:short>')
 def redirectShort(short):
     # id = URLOperations.lengthen(short)
     search = Link.query.filter_by(short=short).first()
     if not search:
-        print("Cannot redirect. Invalid URL.")
+        flash("Cannot redirect. Invalid URL.")
         return redirect('/')
     return redirect(search.long)
-
