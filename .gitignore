@@ -1,6 +1,10 @@
 # Logs
 [Ll]ogs/
 
+.idea/
+.vscode/
+
+
 # my notes.txt
 notes.txt
 

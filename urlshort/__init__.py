@@ -1,27 +1,34 @@
-from flask import Flask, render_template, session, request, flash, url_for, redirect, Response
+from flask import Flask, render_template, session, request, flash, url_for, redirect, Response, current_app
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 import logging
 from logging.handlers import RotatingFileHandler
 import os
 
-app = Flask(__name__)
-app.config.from_object(Config)
-db = SQLAlchemy(app)
+from urlshort.strings import Strings
 
-from urlshort import routes, models
-
-# Logfiles
-if not app.debug:
-    if not os.path.exists('logs'):
-        os.mkdir('logs')
-    handler = RotatingFileHandler('logs/urlshort.log', maxBytes=10240, backupCount=10)
-    handler.setLevel(logging.INFO)
-    handler.setFormatter(logging.Formatter("[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s"))
-    app.logger.addHandler(handler)
-    app.logger.setLevel(logging.INFO)
-    app.logger.info('Startup.')
+db = SQLAlchemy()
 
 
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    db.init_app(app)
 
-    
+    app.app_context().push()
+    return app
+
+
+def create_test_app(self):
+    app = Flask(__name__)
+    app.config.update(
+        TESTING=True,
+        SECRET_KEY="testingsecretkey!?!",
+        SQLALCHEMY_DATABASE_URI="sqlite:///test.db",
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        URL="urlshort.git"
+    )
+    db.init_app(app)
+    app.app_context().push()
+    return app
+

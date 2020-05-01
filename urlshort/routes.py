@@ -1,12 +1,11 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, current_app
 
-from urlshort import app, db
 from urlshort.forms import URLForm, UnshortenForm
-from urlshort.models import Link
+from urlshort.models import Link, db
 from urlshort.shorten import URLOperations
 
 
-@app.route('/', methods=['GET', 'POST'])
+@current_app.route('/', methods=['GET', 'POST'])
 def index():
     form = URLForm()
 
@@ -16,7 +15,7 @@ def index():
         # Check if url already in database.
         if search:
             print("Exists in db: " + search.short)
-            flash(app.config["URL"] + "/" + search.short)
+            flash(current_app.config["URL"] + "/" + search.short)
             return redirect(url_for('index'))
 
         # If not, add to database.
@@ -26,14 +25,14 @@ def index():
         link.short = URLOperations.shorten(link.id)
         db.session.add(link)
         db.session.commit()
-        flash(app.config["URL"] + "/" + link.short)
+        flash(current_app.config["URL"] + "/" + link.short)
         print("Added to database: " + link.short)
 
         return redirect(url_for('index'))
     return render_template('index.html', form=form)
 
 
-@app.route('/unshorten', methods=['GET', 'POST'])
+@current_app.route('/unshorten', methods=['GET', 'POST'])
 def unshortenRoute():
     form = UnshortenForm()
     if form.validate_on_submit():
@@ -47,7 +46,7 @@ def unshortenRoute():
     return render_template('unshorten.html', form=form)
 
 
-@app.route('/<string:short>')
+@current_app.route('/<string:short>')
 def redirectShort(short):
     # id = URLOperations.lengthen(short)
     search = Link.query.filter_by(short=short).first()
