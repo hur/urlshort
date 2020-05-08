@@ -39,11 +39,13 @@ You can generate a random secret key using Python:
 >>> uuid.uuid4().hex
 ```
 
-Initialize the database in the Python interpreter:
+To initialize the database, use
 ```
->>> from urlshort import db
->>> db.create_all()
+flask createdb
 ```
+
 Run the app using `flask run`. In some cases using `python -m flask run` instead may resolve issues that occur with `flask run`.
+
+For running all tests, use `py.test`
 
 Enter a URL and press shorten. The web app will display `urlshort.git/X`. Navigate to `http://127.0.0.1:5000/X` to be redirected to the page.
