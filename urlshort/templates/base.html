@@ -15,7 +15,7 @@ footer_url2_label: Label to display for the second footer link
 <div id="aligner">
     <div id ="pal">
         {% if form.errors %}
-            URL validation failed.
+            {{ URLValidationError }}
         {% else %}
             &nbsp
         {% endif %}
