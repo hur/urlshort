@@ -9,5 +9,5 @@ class URLForm(FlaskForm):
 
 
 class UnshortenForm(FlaskForm):
-    url = StringField('url', validators=[InputRequired()],  # ADD URL
+    url = StringField('url', validators=[InputRequired()],
                       render_kw={"placeholder": "Enter URL to unshorten"})

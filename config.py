@@ -21,3 +21,4 @@ class TestConfig(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     URL = "urlshort.git"
     TESTING = True
+    WTF_CSRF_ENABLED = False
