@@ -1,6 +1,9 @@
 # Logs
 [Ll]ogs/
 
+# PyCharm
+.idea/
+
 # my notes.txt
 notes.txt
 
