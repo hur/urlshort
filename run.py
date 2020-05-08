@@ -1,15 +1,7 @@
-from urlshort import app, db
+from urlshort import create_app
+from urlshort.models import db
 from urlshort.strings import Strings
 
-
-@app.shell_context_processor
-def make_shell_context():
-    return {'db': db}
+app = create_app()
 
 
-@app.context_processor
-def inject_strings():
-    """
-    Inject strings automatically into the context of templates
-    """
-    return Strings.strings
