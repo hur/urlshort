@@ -1,3 +1,5 @@
+import pytest
+
 from urlshort.forms import URLForm, UnshortenForm
 
 
@@ -9,6 +11,7 @@ class TestURLForm:
         form = URLForm(url='notaurl')
         assert form.validate() is False
 
+    @pytest.mark.skip(reason="WIP")
     def test_valid_link(self, app):
         """Valid link"""
         form = URLForm(url='https://example.com')
@@ -22,6 +25,7 @@ class TestURLForm:
 class TestUnshortenForm:
     """UnshortenForm tests"""
 
+    @pytest.mark.skip(reason="WIP")
     def test_valid_input(self, app):
         form = UnshortenForm(url='3')
         assert form.validate()
@@ -30,4 +34,3 @@ class TestUnshortenForm:
         form = UnshortenForm(url='')
 
         assert form.validate() is False
-
