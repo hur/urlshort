@@ -9,29 +9,27 @@ footer_url2_label: Label to display for the second footer link
 
 <head>
 <link rel="stylesheet" href="{{url_for('.static', filename='style.css')}}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
 <title>urlshort</title>
 </head>
 <body>
 <div id="aligner">
     <div id ="pal">
-        {% if form.errors %}
-            {{ URLValidationError }}
-        {% else %}
-            &nbsp
-        {% endif %}
+        URLShort
         <form method="POST" action="{{ action }}">
             {{ form.csrf_token }}
-            {{ form.url }}
-            <input type="submit" value="{{ action_label }}">
+            {{ form.url }}<input id="shortenbtn" type="submit" value="{{ action_label }}">
         </form>
 
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
+        {% if form.errors %}
+            <p class="flashes">{{ URLValidationError }}</p>
+        {% elif messages %}
             {% for message in messages %}
-                <p class="flashes">{{ message }}</p>
+                <p class="flashes"><a id="short" href="{{ message }}">{{ message }}</a></p>
             {% endfor %}
         {% else %}
-            <p class="flashes">urlshort.git</p>
+            <p class="flashes">&nbsp</p>
         {% endif %}
         {% endwith %}
     </div>
@@ -39,7 +37,7 @@ footer_url2_label: Label to display for the second footer link
 <div id="footer">
     <a href="https://www.github.com/hur/urlshort/">GitHub Source</a>
     {% if footer_url2 is defined and footer_url2_label is defined %}
-    •
+    -
     <a href={{ footer_url2 }}>{{ footer_url2_label }}</a>
     {% endif %}
 </div>

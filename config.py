@@ -12,13 +12,13 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir, 'urlshort.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    URL = "urlshort.git"
+    URL = "http://127.0.0.1:5000"
 
 
 class TestConfig(object):
     SECRET_KEY = str(uuid.uuid4().hex)
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'test.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    URL = "urlshort.git"
+    URL = "http://127.0.0.1:5000"
     TESTING = True
     WTF_CSRF_ENABLED = False

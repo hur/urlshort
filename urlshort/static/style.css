@@ -1,3 +1,8 @@
+body {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.3em;
+}
+
 #aligner {
     display:flex;
     align-items:center;
@@ -7,13 +12,41 @@
 }
 
 #pal {
+    /*background-color: #f8f7f1;*/
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 1em 10px;
     max-width:50%;
     text-align:center;
 }
 
 form {
-    margin-top:1em;
-    margin-bottom:1em;
+    margin-top: 1em;
+
+}
+
+#url {
+    font-family: inherit;
+    text-align: center;
+    background-color: #eeebdc;
+    height: 33%;
+    border: none;
+}
+
+#shortenbtn {
+    font-family: inherit;
+    background-color: #c1c1bf;
+    height: 33%;
+    border: none;
+}
+
+
+
+input:required {
+    box-shadow:none;
+}
+input:invalid {
+    box-shadow:0 0 0 0;
 }
 
 #footer {
@@ -25,16 +58,18 @@ form {
     margin-bottom:3px;
 }
 
-#footer a {
+
+
+a {
     color: black;
     text-decoration: none;
 }
 
-#footer a:hover {
+a:hover {
     text-decoration: underline;
 }
 
-#footer a:visited {
+a:visited {
     color: black;
 
 }
