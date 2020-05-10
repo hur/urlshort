@@ -1,4 +1,6 @@
 # URLshort
+![tests](https://github.com/hur/urlshort/workflows/tests/badge.svg)
+
 Shortens URLs by taking database index and converting to base 56 with a modified character set.
 
 In its current state, URLshort is not hosted anywhere.
