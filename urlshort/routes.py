@@ -51,7 +51,7 @@ def unshortenRoute():
 
 @shortener.route('/<string:short>')
 def redirectShort(short):
-    # id = URLOperations.lengthen(short)
+    # id = URLOperations.lengthen(short) -
     search = Link.query.filter_by(short=short).first()
     if not search:
         flash("Cannot redirect. Invalid URL.")
