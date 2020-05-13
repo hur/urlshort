@@ -4,7 +4,6 @@ from urlshort.forms import URLForm, UnshortenForm
 from urlshort.models import Link, db
 from urlshort.shorten import URLOperations
 from urlshort.strings import Strings
-from validators import url as validate_url
 
 shortener = Blueprint('shortener', __name__, template_folder='templates', static_folder='static')
 
