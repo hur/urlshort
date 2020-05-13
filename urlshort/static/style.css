@@ -1,6 +1,9 @@
+
+
 body {
     font-family: 'Roboto Mono', monospace;
     font-size: 1.3em;
+    margin-bottom: 1.3em;
 }
 
 #aligner {
@@ -16,7 +19,7 @@ body {
     background: #ffffff;
     border-radius: 5px;
     padding: 1em 10px;
-    max-width:50%;
+    max-width:95%;
     text-align:center;
 }
 
@@ -55,12 +58,14 @@ input:invalid {
 }
 
 #footer {
-    position:fixed;
-    bottom:0%;
-    left:50%;
-    transform: translateX(-50%);
-    font-size:0.8em;
-    margin-bottom:3px;
+    text-align: center;
+    position: fixed;
+    height: 1.3em;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    font-size: 0.8em;
 }
 
 
@@ -76,5 +81,8 @@ a:hover {
 
 a:visited {
     color: black;
+}
 
+.footer-space {
+    margin: 0;
 }
