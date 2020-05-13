@@ -12,7 +12,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir, 'urlshort.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    URL = "http://127.0.0.1:5000"
+    URL = os.environ.get('URL')
 
 
 class TestConfig(object):
