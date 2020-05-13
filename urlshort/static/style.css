@@ -22,22 +22,27 @@ body {
 
 form {
     margin-top: 1em;
-
 }
 
-#url {
-    font-family: inherit;
+#url, #shortenbtn {
+    padding: 3px;
     text-align: center;
-    background-color: #eeebdc;
-    height: 33%;
-    border: none;
+    border: 1px solid lightgray;
+    display: inline-block;
+    border-radius: 0;
+    -webkit-appearance: none;
+
 }
 
 #shortenbtn {
-    font-family: inherit;
-    background-color: #c1c1bf;
-    height: 33%;
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid transparent;
+}
+
+#shortenbtn::-moz-focus-inner {
+    border: 0;
+    padding: 0;
 }
 
 
@@ -54,7 +59,7 @@ input:invalid {
     bottom:0%;
     left:50%;
     transform: translateX(-50%);
-    font-size:1em;
+    font-size:0.8em;
     margin-bottom:3px;
 }
 
