@@ -13,6 +13,7 @@ class Config(object):
                               'sqlite:///' + os.path.join(basedir, 'urlshort.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     URL = os.environ.get('URL') or 'URL NOT SET'
+    PROTOCOL = os.environ.get('URLSHORT_PROTOCOL') or 'http://'
 
 
 class TestConfig(object):
@@ -22,3 +23,4 @@ class TestConfig(object):
     URL = "http://127.0.0.1:5000"
     TESTING = True
     WTF_CSRF_ENABLED = False
+    PROTOCOL = 'http://'

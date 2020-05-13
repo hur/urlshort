@@ -4,6 +4,7 @@ from urlshort.forms import URLForm, UnshortenForm
 from urlshort.models import Link, db
 from urlshort.shorten import URLOperations
 from urlshort.strings import Strings
+from validators import url as validate_url
 
 shortener = Blueprint('shortener', __name__, template_folder='templates', static_folder='static')
 
@@ -18,7 +19,7 @@ def index():
         # Check if url already in database.
         if search:
             print("Exists in db: " + search.short)
-            flash(current_app.config["URL"] + "/" + search.short)
+            flash(current_app.config['PROTOCOL'] + current_app.config["URL"] + "/" + search.short)
             return redirect(url_for('shortener.index'))
 
         # If not, add to database.
@@ -28,7 +29,7 @@ def index():
         link.short = URLOperations.shorten(link.id)
         db.session.add(link)
         db.session.commit()
-        flash(current_app.config["URL"] + "/" + link.short)
+        flash(current_app.config['PROTOCOL'] + current_app.config["URL"] + "/" + link.short)
         print("Added to database: " + link.short)
 
         return redirect(url_for('shortener.index'))
@@ -39,7 +40,13 @@ def index():
 def unshortenRoute():
     form = UnshortenForm()
     if form.validate_on_submit():
-        search = Link.query.filter_by(short=form.url.data).first()
+        short = form.url.data
+        if short.startswith('http://' + current_app.config['URL'] + '/') or \
+                short.startswith('https://' + current_app.config['URL'] + '/') or \
+                short.startswith(current_app.config['URL'] + '/'):
+            short = short.split("/")[-1]
+
+        search = Link.query.filter_by(short=short).first()
         if search:
             print("Exists in db: " + search.short)
             flash(search.long)
