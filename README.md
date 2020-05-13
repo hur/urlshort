@@ -1,11 +1,11 @@
 # URLshort
 ![tests](https://github.com/hur/urlshort/workflows/tests/badge.svg)
 
-Shortens URLs by taking database index and converting to base 56 with a modified character set.
+Shortens URLs by taking translating database indexes to a radix-56 representation with a character set that improves readability.
 
-In its current state, URLshort is not hosted anywhere.
+For a live demo, see https://hur.wtf (for proper TLS, please use https://url-shortening-app.herokuapp.com/).
+The demo runs on a free heroku dyno, which means that the dyno sleeps when not used and takes some time to restart.
 
-![Sample Image](https://raw.githubusercontent.com/hur/urlshort/master/sample_image.png)
 ## How to setup development environment
 ### Requirements
 Python 3 & virtualenv (recommended)
@@ -41,6 +41,12 @@ You can generate a random secret key using Python:
 >>> uuid.uuid4().hex
 ```
 
+Configure your environment variables and `config.py` to suit your needs, e.g.
+if you wish to use a different database url.
+It is recommended to set the `URL` environment variable to whatever url you are running the app in
+(e.g. `http://127.0.0.1:5000`)
+so that the app can provide correct output.
+
 To initialize the database, use
 ```
 flask createdb
@@ -50,4 +56,3 @@ Run the app using `flask run`. In some cases using `python -m flask run` instead
 
 For running all tests, use `py.test`
 
-Enter a URL and press shorten. The web app will display `urlshort.git/X`. Navigate to `http://127.0.0.1:5000/X` to be redirected to the page.
